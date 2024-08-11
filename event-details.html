@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - Event Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light gray background */
+        }
+        .navbar {
+            background-color: #6f4f28; /* Brown color */
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        .navbar a:hover {
+            background-color: #8b6d3b; /* Lighter brown for hover effect */
+            border-radius: 4px;
+        }
+        .navbar .brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .container {
+            padding: 2rem;
+            margin-top: 56px; /* Adjust for fixed navbar */
+        }
+        .event-detail {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            padding: 2rem;
+        }
+      
+        .event-detail h1 {
+            margin-top: 0;
+            font-size: 2rem;
+            color: #333;
+        }
+        .event-detail p {
+            color: #666;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            color: white;
+            background-color: #6f4f28; /* Brown color */
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #8b6d3b; /* Lighter brown for hover effect */
+        }
+        .footer {
+            background-color: #6f4f28; /* Brown color */
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer a {
+            color: #ffd700; /* Gold color for links */
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="home.html" class="brand">Event Management</a>
+        <div>
+            <a href="home.html">Home</a>
+            <a href="events.html">Events</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html" class="btn">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="event-detail" id="event-detail">
+            <!-- Event details will be dynamically inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Event Management. All rights reserved.</p>
+        <p><a href="contact.html">Contact Us</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Example event data
+        const events = [
+            { id: 1, title: 'Music Festival', description: 'Join us for a day of live music and fun!',  date: '2024-09-15', location: 'City Park' },
+            { id: 2, title: 'Art Exhibition', description: 'Explore the latest contemporary art pieces from local artists.', date: '2024-10-05', location: 'Art Gallery' },
+            { id: 3, title: 'Food Truck Rally', description: 'Sample a variety of delicious food from local food trucks.', date: '2024-11-20', location: 'Downtown Square' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get event ID from URL query parameters
+            const params = new URLSearchParams(window.location.search);
+            const eventId = parseInt(params.get('event-id'), 10);
+
+            // Find event by ID
+            const event = events.find(e => e.id === eventId);
+
+            if (event) {
+                // Display event details
+                const eventDetailElement = document.getElementById('event-detail');
+                eventDetailElement.innerHTML = `
+                     alt="${event.title}">
+                    <h1>${event.title}</h1>
+                    <p><strong>Date:</strong> ${event.date}</p>
+                    <p><strong>Location:</strong> ${event.location}</p>
+                    <p>${event.description}</p>
+                    <a href="events.html" class="btn">Back to Events</a>
+                `;
+            } else {
+                // Handle case where event is not found
+                document.getElementById('event-detail').innerHTML = '<p>Event not found.</p>';
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Event Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light gray background */
+        }
+        .navbar {
+            background-color: #6f4f28; /* Brown color */
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        .navbar a:hover {
+            background-color: #8b6d3b; /* Lighter brown for hover effect */
+            border-radius: 4px;
+        }
+        .navbar .brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .container {
+            padding: 2rem;
+            margin-top: 56px; /* Adjust for fixed navbar */
+        }
+        .search-bar {
+            margin-bottom: 2rem;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .event-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #fff;
+            margin-bottom: 1rem;
+        }
+        .event-card img {
+            width: 100%;
+            height: auto;
+        }
+        .card-body {
+            padding: 1rem;
+        }
+        .card-title {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #333;
+        }
+        .card-text {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            color: white;
+            background-color: #6f4f28; /* Brown color */
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #8b6d3b; /* Lighter brown for hover effect */
+        }
+        .footer {
+            background-color: #6f4f28; /* Brown color */
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer a {
+            color: #ffd700; /* Gold color for links */
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="home.html" class="brand">Event Management</a>
+        <div>
+            <a href="home.html">Home</a>
+            <a href="events.html">Events</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html" class="btn">Login</a>
+        </div>
+    </nav>
+    <br>
+    <br>
+    
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Events</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search events by title...">
+        </div>
+        <div id="event-list" class="row">
+            <!-- Event items will be dynamically inserted here by JavaScript -->
+        </div>
+    </div>
+<br>
+<br>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Event Management. All rights reserved.</p>
+        <p><a href="contact.html">Contact Us</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Example event data
+        const events = [
+            { title: 'Music Festival', description: 'Join us for a day of live music and fun!', link: 'event-details.html' },
+            { title: 'Art Exhibition', description: 'Explore the latest contemporary art pieces from local artists.', link: 'event-details.html' },
+            { title: 'Food Truck Rally', description: 'Sample a variety of delicious food from local food trucks.',  link: 'event-details.html' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const eventList = document.getElementById('event-list');
+            const searchInput = document.getElementById('searchInput');
+
+            // Function to render events
+            function renderEvents(filteredEvents) {
+                eventList.innerHTML = ''; // Clear current events
+                filteredEvents.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card';
+                    eventCard.innerHTML = `
+                        <img src="${event.image}" alt="${event.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${event.title}</h5>
+                            <p class="card-text">${event.description}</p>
+                            <a href="${event.link}" class="btn">More Details</a>
+                        </div>
+                    `;
+                    eventList.appendChild(eventCard);
+                });
+            }
+
+            // Initial rendering of all events
+            renderEvents(events);
+
+            // Search functionality
+            searchInput.addEventListener('input', () => {
+                const searchText = searchInput.value.toLowerCase();
+                const filteredEvents = events.filter(event => event.title.toLowerCase().includes(searchText));
+                renderEvents(filteredEvents);
+            });
+        });
+    </script>
+
+</body>
+</html>

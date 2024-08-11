@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light gray background for the body */
+        }
+        .navbar {
+            background-color: #6f4f28; /* Brown color */
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        .navbar a:hover {
+            background-color: #8b6d3b; /* Lighter brown for hover effect */
+            border-radius: 4px;
+        }
+        .navbar .brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .hero {
+            background: url('hero-image.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            margin-top: 56px; /* Adjust for fixed navbar */
+        }
+        .hero h1 {
+            margin: 0;
+            font-size: 3rem;
+            color: #fff;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: #fff;
+        }
+        .hero .btn {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+            color: white;
+            background-color: #6f4f28; /* Brown color */
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .hero .btn:hover {
+            background-color: #8b6d3b; /* Lighter brown for hover effect */
+        }
+        .container {
+            padding: 2rem;
+        }
+        .event-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #fff;
+            margin-bottom: 1rem;
+        }
+        .event-card img {
+            width: 100%;
+            height: auto;
+        }
+        .card-body {
+            padding: 1rem;
+        }
+        .card-title {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #333;
+        }
+        .card-text {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+        .footer {
+            background-color: #6f4f28; /* Brown color */
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer a {
+            color: #ffd700; /* Gold color for links */
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="brand">Event Management</a>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="events.html">Events</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html" class="btn">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div>
+            <h1>Welcome to Event Management</h1>
+            <p>Find and manage your favorite events with ease.</p>
+            <a href="events.html" class="btn">Browse Events</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section id="events">
+            <h2>Featured Events</h2>
+            <div id="event-list" class="row">
+                <!-- Event items will be dynamically inserted here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Event Management. All rights reserved.</p>
+        <p><a href="contact.html">Contact Us</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Example event data
+            const events = [
+                { title: 'Event Title 1', description: 'Description of event 1.', image: 'event1.jpg', link: 'event-details.html' },
+                { title: 'Event Title 2', description: 'Description of event 2.', image: 'event2.jpg', link: 'event-details.html' },
+                { title: 'Event Title 3', description: 'Description of event 3.', image: 'event3.jpg', link: 'event-details.html' }
+            ];
+
+            const eventList = document.getElementById('event-list');
+
+            events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'event-card';
+                eventCard.innerHTML = `
+                    <img src="${event.image}" alt="${event.title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${event.title}</h5>
+                        <p class="card-text">${event.description}</p>
+                        <a href="${event.link}" class="btn">More Details</a>
+                    </div>
+                `;
+                eventList.appendChild(eventCard);
+            });
+        });
+    </script>
+
+</body>
+</html>
